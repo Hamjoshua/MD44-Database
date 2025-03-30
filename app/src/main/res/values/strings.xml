@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">DbApp</string>
     <string name="btn_delete">Удалить</string>
+    <string name="add_btn">+</string>
 </resources>

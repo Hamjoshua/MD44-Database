@@ -27,7 +27,7 @@
 
     <Button
         android:text="@string/btn_delete"
-        android:id="@+id/delete"
+        android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 

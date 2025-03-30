@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 import dagger.hilt.android.HiltAndroidApp
 
 @Database(entities = [Note::class], version = 1)
-abstract class DbModule : RoomDatabase(){
+abstract class NoteDatabase : RoomDatabase(){
     abstract fun noteDao() : NoteDao
 }
 
