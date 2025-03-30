@@ -8,6 +8,10 @@ import javax.inject.Inject
 class NoteViewModel @Inject constructor(
     private val noteRepository: NoteRepository
 ) : ViewModel() {
+
+    init {
+
+    }
     fun getAllNotes() : List<Note> {
         return noteRepository.getAllNotes()
     }
