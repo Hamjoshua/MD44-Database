@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -35,8 +37,16 @@ android {
     }
 }
 
-dependencies {
 
+kapt {
+    correctErrorTypes = true
+}
+
+dependencies {
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation("androidx.room:room-common:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
