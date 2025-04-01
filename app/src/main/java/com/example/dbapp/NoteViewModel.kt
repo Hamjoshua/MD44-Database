@@ -11,9 +11,10 @@ class NoteViewModel @Inject constructor(
 ) : ViewModel() {
 
     init {
-
+        val note: Note = Note(0, "Welcome", "Добро пожаловать!")
+        noteRepository.insertNote(note)
     }
-    fun getAllNotes() : LiveData<List<Note>> {
+    fun getAllNotes() : List<Note> {
         return noteRepository.getAllNotes()
     }
 

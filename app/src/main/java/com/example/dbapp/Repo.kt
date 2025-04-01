@@ -7,7 +7,7 @@ class NoteRepository @Inject constructor(
     private val noteDao: NoteDao
 ) {
 
-    fun getAllNotes() : LiveData<List<Note>> {
+    fun getAllNotes() : List<Note> {
         return noteDao.getAllNotes()
     }
 
