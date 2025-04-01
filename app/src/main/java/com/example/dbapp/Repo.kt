@@ -1,12 +1,13 @@
 package com.example.dbapp
 
+import androidx.lifecycle.LiveData
 import javax.inject.Inject
 
 class NoteRepository @Inject constructor(
     private val noteDao: NoteDao
 ) {
 
-    fun getAllNotes() : List<Note>{
+    fun getAllNotes() : LiveData<List<Note>> {
         return noteDao.getAllNotes()
     }
 

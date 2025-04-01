@@ -1,5 +1,6 @@
 package com.example.dbapp
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -12,7 +13,7 @@ class NoteViewModel @Inject constructor(
     init {
 
     }
-    fun getAllNotes() : List<Note> {
+    fun getAllNotes() : LiveData<List<Note>> {
         return noteRepository.getAllNotes()
     }
 

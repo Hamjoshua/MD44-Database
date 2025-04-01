@@ -32,7 +32,10 @@ class MainActivity : AppCompatActivity() {
 
     fun initList(){
         val notes = viewModel.getAllNotes()
-        binding.rView.layoutManager = LinearLayoutManager(this)
-        binding.rView.adapter = NoteAdapter(notes)
+        if(notes.value!!.isNotEmpty()){
+            binding.rView.layoutManager = LinearLayoutManager(this)
+            binding.rView.adapter = NoteAdapter(notes.value!!)
+        }
+
     }
 }
