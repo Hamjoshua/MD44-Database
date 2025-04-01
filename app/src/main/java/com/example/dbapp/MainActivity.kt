@@ -9,7 +9,7 @@ import com.example.dbapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NoteButtonHandler {
     private val viewModel: NoteViewModel by viewModels<NoteViewModel>()
     private lateinit var binding : ActivityMainBinding
     private lateinit var adapter: NoteAdapter
@@ -19,30 +19,44 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        observeNotesList()
         initList()
         initAddButton()
+    }
+
+    override fun onDeleteClick(note: Note) {
+        viewModel.deleteNote(note)
     }
 
     fun initAddButton(){
         binding.addBtn.setOnClickListener{
             val title : String = binding.title.text.toString()
             val content : String = binding.content.text.toString()
-            val note : Note = Note(1, title, content)
+            val note : Note = Note(0, title, content)
             viewModel.insertNote(note)
 
             Toast.makeText(this, "Заметка добавлена", Toast.LENGTH_SHORT).show()
-            initList()
+            updateList()
         }
     }
 
     fun initList(){
-        val notes = viewModel.getAllNotes()
+        adapter = NoteAdapter(viewModel.notes.value!!, this)
+        binding.rView.layoutManager = LinearLayoutManager(this)
+        binding.rView.adapter = adapter
 
-        if(notes.isNotEmpty()){
-            adapter = NoteAdapter(notes)
-            binding.rView.layoutManager = LinearLayoutManager(this)
-            binding.rView.adapter = adapter
+        updateList()
+    }
+
+    fun updateList(){
+        adapter.submitList(viewModel.notes.value)
+    }
+
+    private fun observeNotesList() {
+        viewModel.notes.observe(this) { notes ->
+            notes?.let {
+                updateList()
+            }
         }
-
     }
 }

@@ -9,7 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class NoteAdapter(private val notes: List<Note>) : ListAdapter<Note,
+interface NoteButtonHandler{
+    fun onDeleteClick(note : Note){
+
+    }
+}
+
+class NoteAdapter(private val notes: List<Note>,
+                  private val buttonHandler: NoteButtonHandler) : ListAdapter<Note,
         NoteAdapter.NoteViewHolder>(NoteDiffCallback()) {
     inner class NoteViewHolder(view: View): RecyclerView.ViewHolder(view){
         val title: TextView = view.findViewById<TextView>(R.id.header_title)
@@ -28,7 +35,7 @@ class NoteAdapter(private val notes: List<Note>) : ListAdapter<Note,
         holder.title.text = note.title
         holder.content.text = note.content
         holder.btn_delete.setOnClickListener{
-            notes.drop(position)
+            buttonHandler.onDeleteClick(note)
         }
     }
 }
